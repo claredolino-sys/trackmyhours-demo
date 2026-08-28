@@ -5,7 +5,7 @@ import { GoogleGenAI, Type, FunctionDeclaration } from '@google/genai';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // Add middleware to parse JSON bodies (with increased limit for base64 images/files)
   app.use(express.json({ limit: '50mb' }));
