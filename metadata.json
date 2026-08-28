@@ -1,0 +1,8 @@
+{
+  "name": "Remix TrackMyHours - Secure Attendance System",
+  "description": "Demo",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}
