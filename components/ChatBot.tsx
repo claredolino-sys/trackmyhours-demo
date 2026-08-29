@@ -117,7 +117,31 @@ export const ChatBot: React.FC<ChatBotProps> = ({ user }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get chat response');
+        const errData = await response.json().catch(() => ({}));
+        let errorMessage = 'Failed to get chat response';
+        if (errData.error) {
+           const errStr = typeof errData.error === 'string' ? errData.error : JSON.stringify(errData.error);
+           if (errStr.includes("API key not valid") || errStr.includes("GEMINI_API_KEY is not configured") || errStr.includes("API_KEY_INVALID")) {
+               errorMessage = "It looks like the Gemini API key is missing or invalid. Please configure your `GEMINI_API_KEY` in the environment variables (e.g. Vercel dashboard) to use the AI Chatbot.";
+           } else {
+               errorMessage = typeof errData.error === 'string' ? errData.error : "An error occurred with the AI service.";
+               // Cleanup ApiError formatting if present
+               if (errorMessage.includes("ApiError: ")) {
+                   try {
+                       const jsonPart = errorMessage.split("ApiError: ")[1];
+                       if (jsonPart) {
+                           const parsed = JSON.parse(jsonPart);
+                           if (parsed.error && parsed.error.message) {
+                               errorMessage = parsed.error.message;
+                           }
+                       }
+                   } catch (e) {
+                       // ignore parsing error
+                   }
+               }
+           }
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -172,9 +196,12 @@ export const ChatBot: React.FC<ChatBotProps> = ({ user }) => {
 
       const botMessage: Message = { id: Date.now().toString(), sender: 'bot', text: botResponseText };
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
+    } catch (error: any) {
       console.error('ChatBot error:', error);
-      const errorMessage: Message = { id: Date.now().toString(), sender: 'bot', text: 'Sorry, I encountered an error while processing your request. The file type might not be supported by the AI model directly.' };
+      const errText = error.message && error.message !== 'Failed to fetch' 
+        ? error.message 
+        : 'Sorry, I encountered an error while processing your request.';
+      const errorMessage: Message = { id: Date.now().toString(), sender: 'bot', text: errText };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);

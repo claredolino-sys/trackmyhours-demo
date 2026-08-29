@@ -24,8 +24,36 @@ export default async function handler(req: any, res: any) {
     const { userMessage, user } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
     
-    if (!apiKey) {
-      return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on the server.' });
+    // DEMO FALLBACK MODE: If no API key is provided, use a simulated rule-based chatbot
+    if (!apiKey || apiKey === 'your_gemini_api_key_here') {
+      const text = (userMessage?.text || '').toLowerCase();
+      let botResponseText = "I am currently running in **Demo Mode** (no AI API key configured). Try asking me about your **hours**, **attendance**, or to **contact the admin**!";
+      let functionCalls: any[] = [];
+
+      if (text.includes('admin') || text.includes('contact') || text.includes('help')) {
+        botResponseText = "Since we are in Demo Mode, I'll go ahead and simulate sending a message to the Super Admin for you.";
+        functionCalls.push({
+          name: 'notifyAdmin',
+          args: { message: userMessage.text || "Demo admin request" }
+        });
+      } else if (text.includes('hour') || text.includes('attendance') || text.includes('dtr')) {
+        botResponseText = "You can view your total hours and generate your DTR PDF directly from your Dashboard! (This is a Demo Mode automated response).";
+      } else if (text.includes('hello') || text.includes('hi') || text.includes('hey')) {
+        botResponseText = `Hello ${user?.profile?.name || 'there'}! I am the TrackMyHours Assistant running in offline Demo Mode. How can I help?`;
+      } else if (userMessage.attachment) {
+        botResponseText = "I see you attached a file! In full production mode with an API key, I would analyze this image/document for you. In Demo Mode, I'll just acknowledge it looks great!";
+        if (text.includes('admin') || text.includes('profile')) {
+           functionCalls.push({
+             name: 'sendProfilePhotoToAdmin',
+             args: { message: "Uploaded a photo in demo mode." }
+           });
+           botResponseText += " I have also simulated sending this to the admin.";
+        }
+      }
+
+      // Add a slight delay to make it feel like an AI is "thinking"
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return res.json({ text: botResponseText, functionCalls });
     }
 
     const ai = new GoogleGenAI({ apiKey });
