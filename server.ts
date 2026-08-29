@@ -57,7 +57,7 @@ async function startServer() {
           });
         } else if (text.includes('hour') || text.includes('attendance') || text.includes('dtr')) {
           botResponseText = "You can view your total hours and generate your DTR PDF directly from your Dashboard! (This is a Demo Mode automated response).";
-        } else if (text.includes('hello') || text.includes('hi') || text.includes('hey')) {
+        } else if (/\bhello\b/.test(text) || /\bhi\b/.test(text) || /\bhey\b/.test(text)) {
           botResponseText = `Hello ${user?.profile?.name || 'there'}! I am the TrackMyHours Assistant running in offline Demo Mode. How can I help you today?`;
         } else if (userMessage.attachment) {
           botResponseText = "I see you attached a file! In full production mode with an API key, I would analyze this image/document for you. In Demo Mode, I'll just acknowledge it looks great!";
