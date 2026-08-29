@@ -146,6 +146,10 @@ export const Login: React.FC<LoginProps> = ({ onLogin, onRegister, onResetPasswo
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">TrackMyHours</h1>
           <p className="text-brand-100">Daily Time Record Monitoring System</p>
+          <div className="mt-6 p-3 bg-brand-700/50 rounded-lg text-xs text-brand-100 text-left border border-brand-500 shadow-inner">
+            <span className="font-semibold block mb-1">🔒 Demo Notice:</span>
+            This is a sanitized demo version of a system originally built for a government agency. All sensitive data and proprietary branding have been removed or anonymized to comply with privacy requirements.
+          </div>
         </div>
         
         <div className="p-8">

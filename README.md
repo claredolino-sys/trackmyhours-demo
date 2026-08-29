@@ -1,5 +1,8 @@
 # TrackMyHours 🕒
 
+> **🔒 Privacy & Data Disclaimer**  
+> This repository contains a sanitized, open-source demo version of an application originally developed for a government agency. To comply with privacy requirements and non-disclosure standards, all sensitive production data, credentials, and proprietary branding have been completely removed and replaced with mock data.
+
 An AI-powered attendance and Daily Time Record (DTR) management system designed for seamless employee and intern time tracking. 
 
 TrackMyHours features role-based dashboards, biometric facial recognition for secure clock-ins, automated DTR PDF generation, an integrated AI assistant, and an offline-first demo mode for instant evaluation.
