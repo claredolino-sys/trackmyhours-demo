@@ -51,7 +51,9 @@ export default async function handler(req: any, res: any) {
         });
       } else if (text.includes('qr code login')) {
         botResponseText = "The QR code login allows you to sign in instantly! Just click the 'Scan QR' button on the login screen and show your personalized QR code to your device's camera.";
-      } 
+      } else if (text.includes('how this system works') || text.includes('how it works') || text.includes('how the system works') || text.includes('how does this work')) {
+        botResponseText = "TrackMyHours is a modern attendance tracking system! Users can securely clock in and out using AI-powered facial recognition (liveness detection) or QR codes. It automatically calculates your rendered hours and lets you download a standardized Daily Time Record (DTR) PDF. Super Admins have a dedicated dashboard to manage users, monitor attendance in real-time, and make adjustments as needed.";
+      }
       // General fallbacks
       else if (text.includes('admin') || text.includes('contact') || text.includes('help')) {
         botResponseText = "Since we are in Demo Mode, I'll go ahead and simulate sending a message to the Super Admin for you.";
