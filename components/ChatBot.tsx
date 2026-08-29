@@ -164,7 +164,7 @@ export const ChatBot: React.FC<ChatBotProps> = ({ user }) => {
             };
             
             await api.notifications.add(notification);
-            botResponseText = "I have sent your message to the Super Admin.";
+            if (!data.text) botResponseText = "I have sent your message to the Super Admin.";
           } else if (call.name === 'sendProfilePhotoToAdmin') {
             const args = call.args;
             
@@ -186,9 +186,9 @@ export const ChatBot: React.FC<ChatBotProps> = ({ user }) => {
               };
               
               await api.notifications.add(notification);
-              botResponseText = "I have sent your profile photo to the Super Admin for approval.";
+              if (!data.text) botResponseText = "I have sent your profile photo to the Super Admin for approval.";
             } else {
-              botResponseText = "I couldn't find a photo to send. Please upload a photo first.";
+              if (!data.text) botResponseText = "I couldn't find a photo to send. Please upload a photo first.";
             }
           }
         }
