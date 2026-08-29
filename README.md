@@ -76,5 +76,3 @@ Because this app utilizes a full-stack architecture (an Express server is requir
 3. Set the Start Command: `npm run start`
 4. Add your `GEMINI_API_KEY` to the platform's Environment Variables settings.
 
----
-*Built with ❤️ for secure and intelligent time management.*
