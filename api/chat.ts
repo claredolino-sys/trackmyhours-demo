@@ -27,7 +27,7 @@ export default async function handler(req: any, res: any) {
     // DEMO FALLBACK MODE: If no API key is provided, use a simulated rule-based chatbot
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
       const text = (userMessage?.text || '').toLowerCase();
-      let botResponseText = "I am currently running in **Demo Mode** (no AI API key configured). Try asking me about your **hours**, **attendance**, or to **contact the admin**!";
+      let botResponseText = "Thank you for reviewing my portfolio! 🚀 To ensure a seamless experience, I am currently running in a simulated **Demo Mode**.\n\nWhile I can't process open-ended questions without a live API connection, I can demonstrate my core features! Try asking me how to **log attendance**, check **completed hours**, use **QR code login**, or ask me to **contact the admin**.";
       let functionCalls: any[] = [];
 
       // Handle specific UI suggestions
