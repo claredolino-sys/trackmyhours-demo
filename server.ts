@@ -26,7 +26,30 @@ async function startServer() {
         let botResponseText = "I am currently running in **Demo Mode** (no AI API key configured). Try asking me about your **hours**, **attendance**, or to **contact the admin**!";
         let functionCalls: any[] = [];
 
-        if (text.includes('admin') || text.includes('contact') || text.includes('help')) {
+        // Handle specific UI suggestions
+        if (text.includes('account creation') || text.includes('message to the super admin')) {
+          botResponseText = "I have simulated sending a notification to the Super Admin regarding your account creation request.";
+          functionCalls.push({
+            name: 'notifyAdmin',
+            args: { message: userMessage.text || "Request for account creation" }
+          });
+        } else if (text.includes('upload a document') || text.includes('profile picture') || text.includes('upload my profile')) {
+          botResponseText = "To upload a document or profile picture, you can click the paperclip icon next to the chat input field. If you upload a photo, I can simulate sending it to the admin!";
+        } else if (text.includes('log my attendance')) {
+          botResponseText = "You can log your attendance directly on your Dashboard! Click 'Clock In' or 'Clock Out'. Make sure your camera is allowed so the biometric liveness detection can verify your presence.";
+        } else if (text.includes('completed hours')) {
+          botResponseText = "You can view your total completed hours right on your main Dashboard. You'll also see an option there to generate and download your Daily Time Record (DTR) as a PDF.";
+        } else if (text.includes('forgot to clock out')) {
+          botResponseText = "If you forgot to clock out, I can notify the Super Admin to manually adjust your time record. I have gone ahead and simulated sending them a message for you!";
+          functionCalls.push({
+            name: 'notifyAdmin',
+            args: { message: "User forgot to clock out and needs a time adjustment." }
+          });
+        } else if (text.includes('qr code login')) {
+          botResponseText = "The QR code login allows you to sign in instantly! Just click the 'Scan QR' button on the login screen and show your personalized QR code to your device's camera.";
+        } 
+        // General fallbacks
+        else if (text.includes('admin') || text.includes('contact') || text.includes('help')) {
           botResponseText = "Since we are in Demo Mode, I'll go ahead and simulate sending a message to the Super Admin for you.";
           functionCalls.push({
             name: 'notifyAdmin',
@@ -35,7 +58,7 @@ async function startServer() {
         } else if (text.includes('hour') || text.includes('attendance') || text.includes('dtr')) {
           botResponseText = "You can view your total hours and generate your DTR PDF directly from your Dashboard! (This is a Demo Mode automated response).";
         } else if (text.includes('hello') || text.includes('hi') || text.includes('hey')) {
-          botResponseText = `Hello ${user?.profile?.name || 'there'}! I am the TrackMyHours Assistant running in offline Demo Mode. How can I help?`;
+          botResponseText = `Hello ${user?.profile?.name || 'there'}! I am the TrackMyHours Assistant running in offline Demo Mode. How can I help you today?`;
         } else if (userMessage.attachment) {
           botResponseText = "I see you attached a file! In full production mode with an API key, I would analyze this image/document for you. In Demo Mode, I'll just acknowledge it looks great!";
           if (text.includes('admin') || text.includes('profile')) {
