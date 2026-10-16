@@ -1,41 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Login } from './pages/Login';
-import { Layout } from './components/Layout';
-// Student Pages
-import { StudentDashboard } from './pages/StudentDashboard';
-import { StudentProfile } from './pages/StudentProfile';
-import { StudentActivityLog } from './pages/StudentActivityLog';
-// Employee Pages
-import { EmployeeDashboard } from './pages/EmployeeDashboard';
-import { EmployeeProfile } from './pages/EmployeeProfile';
-import { AdminEmployees } from './pages/AdminEmployees';
-// Shared Pages
-import { RealTimeAttendance } from './pages/RealTimeAttendance';
-import { DTRView } from './pages/DTRView';
-// Admin Pages
-import { AdminDashboard } from './pages/AdminDashboard';
-import { AdminProfile } from './pages/AdminProfile';
-import { AdminStudents } from './pages/AdminStudents';
-import { AdminAttendance } from './pages/AdminAttendance';
-import { AdminReports } from './pages/AdminReports';
-import { AdminActivityLog } from './pages/AdminActivityLog';
-import { AdminStudentLogs } from './pages/AdminStudentLogs';
-import { ArchivedUsers } from './pages/ArchivedUsers';
-import { EmployeeAssignments } from './pages/EmployeeAssignments';
-import { AdminDocumentLinksPage } from './pages/AdminDocumentLinksPage';
-import { AdminNotifications } from './pages/AdminNotifications';
-import { NetworkGuard } from './components/NetworkGuard';
-import { QRScanner } from './components/QRScanner';
-import { FaceLiveness } from './components/FaceLiveness';
-import { ChatBot } from './components/ChatBot';
-
+import { 
+  Login,
+  StudentDashboard,
+  StudentProfile,
+  StudentActivityLog,
+  EmployeeDashboard,
+  EmployeeProfile,
+  AdminEmployees,
+  RealTimeAttendance,
+  DTRView,
+  AdminDashboard,
+  AdminProfile,
+  AdminStudents,
+  AdminAttendance,
+  AdminReports,
+  AdminActivityLog,
+  AdminStudentLogs,
+  ArchivedUsers,
+  EmployeeAssignments,
+  AdminDocumentLinksPage,
+  AdminNotifications,
+  AdminAttendanceInput
+} from './pages';
+import { Layout } from './components/layout';
+import { NetworkGuard, QRScanner, FaceLiveness, ChatBot } from './components/features';
 import { User, UserRole, AttendanceRecord, ActivityLog, UserProfile, ADMIN_IN_CHARGE } from './types';
 import { formatDateForInput } from './services/utils';
 import { useActivity } from './contexts/ActivityContext';
 import { api } from './services/api';
-
-import { AdminAttendanceInput } from './pages/AdminAttendanceInput';
 
 const App: React.FC = () => {
   const { logs: activityLogs, logActivity, refreshLogs } = useActivity();

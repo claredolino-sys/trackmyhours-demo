@@ -16,6 +16,17 @@ TrackMyHours features role-based dashboards, biometric facial recognition for se
 * **Zero-Config Demo Mode:** Automatically seeds rich mock data (users, logs, attendance) into browser storage if no cloud database is provided.
 * **1-Click Interviewer Login:** Built-in "Demo Accounts" shortcuts on the login screen for frictionless evaluation.
 
+## 📚 Project Documentation
+
+Comprehensive enterprise-grade specification documents with architecture diagrams and process flows are available in the [`docs/`](./docs) directory:
+
+* 📄 [**Product Requirements Document (PRD)**](./docs/PRD.md) — Product vision, business objectives, persona matrix, and value stream architecture.
+* ⚙️ [**Technical Requirements Document (TRD)**](./docs/TECHNICAL_REQUIREMENTS.md) — Architecture stack, edge ML biometric liveness models, and Form 48 PDF engine specifications.
+* 🗺️ [**Application Flow & Journeys (APP_FLOW)**](./docs/APP_FLOW.md) — Role-based navigation matrix, user journeys, split-session clock-in flows, and Mermaid diagrams.
+* 🎨 [**Design Brief & UI Constitution (DESIGN_BRIEF)**](./docs/DESIGN_BRIEF.md) — Visual design system, color tokens, typography, atomic components, and accessibility standards.
+* 🗄️ [**Background Schema & Data Models (BACKGROUND_SCHEMA)**](./docs/BACKGROUND_SCHEMA.md) — Relational ERD diagram, JSONB schemas, attendance state machines, and dual-mode storage adapters.
+* 📅 [**Implementation Plan & Roadmap (IMPLEMENTATION_PLAN)**](./docs/IMPLEMENTATION_PLAN.md) — 5-phase engineering roadmap, Work Breakdown Structure (WBS), testing matrix, and deployment guide.
+
 ## 🚀 Tech Stack
 
 * **Frontend:** React 18, TypeScript, Vite, Tailwind CSS
