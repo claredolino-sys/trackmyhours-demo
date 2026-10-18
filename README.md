@@ -90,3 +90,20 @@ Because this app utilizes a full-stack architecture (an Express server is requir
 3. Set the Start Command: `npm run start`
 4. Add your `GEMINI_API_KEY` to the platform's Environment Variables settings.
 
+## 📄 Product Requirements & Visual Diagrams PDF
+
+A comprehensive 8-page publication-grade PDF specification containing five embedded vector architectural and workflow diagrams is available:
+* 📥 [**Download TrackMyHours PRD with Visual Diagrams (PDF)**](./docs/TrackMyHours_PRD_with_Diagrams.pdf)
+  * **Diagram 1:** End-to-End System & Multi-Tier Runtime Architecture
+  * **Diagram 2:** Role-Based Navigation & User Journey State Flowchart
+  * **Diagram 3:** Biometric Edge Face Liveness State Transition Engine
+  * **Diagram 4:** Enterprise Relational Schema & Entity-Relationship Diagram (ERD)
+  * **Diagram 5:** Daily Time Record (DTR) Split-Shift & Form 48 Calculation Engine
+
+## 📜 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for complete details.
+
+Copyright (c) 2026 Clare Dolino, Biliran Province State University (BiPSU) and TrackMyHours Contributors.
+
+

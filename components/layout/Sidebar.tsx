@@ -14,9 +14,12 @@ import {
   Briefcase,
   Bell,
   Award,
-  Link as LinkIcon
+  Link as LinkIcon,
+  FileDown,
+  ShieldCheck
 } from 'lucide-react';
 import { User, UserRole } from '../../types';
+import { LicenseModal } from '../features/LicenseModal';
 
 export interface SidebarProps {
   user: User;
@@ -26,6 +29,7 @@ export interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen, onLogout, onCloseMobile }) => {
+  const [showLicenseModal, setShowLicenseModal] = React.useState(false);
   const role = user.role;
   const commonClasses = "flex items-center space-x-3 px-4 py-3 text-gray-100 hover:bg-brand-700 hover:text-white transition-colors rounded-lg mb-1";
   const activeClasses = "bg-brand-800 text-white font-medium shadow-sm";
@@ -198,17 +202,45 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen, onLogout, onClos
           </nav>
 
           {/* Bottom Actions */}
-          <div className="p-4 border-t border-brand-500">
+          <div className="p-3 border-t border-brand-500/80 space-y-1">
+            <a 
+              href="/TrackMyHours_PRD_with_Diagrams.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center w-full px-3 py-2 text-xs font-medium text-brand-100 hover:text-white hover:bg-brand-700/80 rounded-md transition-colors group"
+              title="View & Download 8-page PRD PDF Specification with Visual Architecture Diagrams"
+            >
+              <FileDown size={15} className="mr-2.5 text-brand-200 group-hover:text-white flex-shrink-0" />
+              <span className="truncate">PRD Spec (PDF)</span>
+              <span className="ml-auto text-[10px] bg-brand-800/90 text-brand-200 px-1.5 py-0.5 rounded font-mono">8p</span>
+            </a>
+
+            <button 
+              onClick={() => setShowLicenseModal(true)}
+              className="flex items-center w-full px-3 py-2 text-xs font-medium text-brand-100 hover:text-white hover:bg-brand-700/80 rounded-md transition-colors group"
+              title="View MIT Software License"
+            >
+              <ShieldCheck size={15} className="mr-2.5 text-brand-200 group-hover:text-white flex-shrink-0" />
+              <span className="truncate">License (MIT)</span>
+              <span className="ml-auto text-[10px] bg-emerald-700/90 text-emerald-100 px-1.5 py-0.5 rounded font-semibold">OS</span>
+            </button>
+
             <button 
               onClick={onLogout}
-              className="flex items-center w-full px-4 py-2 text-sm text-brand-100 hover:text-white hover:bg-brand-700 rounded-md transition-colors"
+              className="flex items-center w-full px-3 py-2 text-xs font-medium text-brand-100 hover:text-white hover:bg-brand-700 rounded-md transition-colors"
             >
-              <LogOut size={18} className="mr-2" />
-              Log out
+              <LogOut size={15} className="mr-2.5 flex-shrink-0" />
+              <span>Log out</span>
             </button>
           </div>
         </div>
       </aside>
+
+      <LicenseModal 
+        isOpen={showLicenseModal} 
+        onClose={() => setShowLicenseModal(false)} 
+      />
     </>
   );
 };
+

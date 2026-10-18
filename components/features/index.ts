@@ -4,3 +4,4 @@ export * from './QRScanner';
 export * from './NetworkGuard';
 export * from './PublicCalendarModal';
 export * from './AdminDocumentLinks';
+export * from './LicenseModal';

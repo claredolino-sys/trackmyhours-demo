@@ -3,8 +3,9 @@ import { User, AttendanceRecord, UserRole } from '../../types';
 import { Button } from '../../components/Button';
 import { generateDTRPdf } from '../../services/pdfService';
 import { getMonthName } from '../../services/utils';
-import { FileDown, FileText, Users, Briefcase, Database, Upload, Download, AlertCircle, Eye, X } from 'lucide-react';
+import { FileDown, FileText, Users, Briefcase, Database, Upload, Download, AlertCircle, Eye, X, ShieldCheck, BookOpen } from 'lucide-react';
 import { api } from '../../services/api';
+import { LicenseModal } from '../../components/features/LicenseModal';
 
 interface AdminReportsProps {
   students: User[];
@@ -20,6 +21,7 @@ export const AdminReports: React.FC<AdminReportsProps> = ({ students, attendance
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [backupMessage, setBackupMessage] = useState<{ text: string; type: 'success' | 'error' | '' }>({ text: '', type: '' });
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [showLicenseModal, setShowLicenseModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Generate dynamic year range: 2023 to Current Year + 1
@@ -204,6 +206,68 @@ export const AdminReports: React.FC<AdminReportsProps> = ({ students, attendance
             </div>
         </div>
 
+        {/* System Documentation & PRD Section */}
+        <div className="bg-white p-4 sm:p-8 rounded-xl shadow-md border border-gray-200">
+            <div className="flex items-center mb-4 text-brand-600">
+                <BookOpen className="w-8 h-8 mr-3" />
+                <div>
+                    <h3 className="text-xl font-bold text-gray-800">System Documentation & Specifications</h3>
+                    <p className="text-xs text-gray-500">Official Product Requirements Document (PRD) with architecture diagrams and licensing</p>
+                </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div className="p-6 border border-brand-100 bg-brand-50/40 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div className="flex items-center justify-between mb-3">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-brand-100 text-brand-800">
+                                8-Page PDF Specification
+                            </span>
+                            <FileText className="w-5 h-5 text-brand-600" />
+                        </div>
+                        <h4 className="font-bold text-gray-900 text-base mb-1">PRD with Visual Architecture Diagrams</h4>
+                        <p className="text-xs text-gray-600 mb-4 leading-relaxed">
+                            Includes complete System Architecture, Navigation Flowchart, Edge Biometric State Transition Engine, Relational ERD, and Form 48 Calculation Engine.
+                        </p>
+                    </div>
+                    <div className="flex gap-2">
+                        <a
+                            href="/TrackMyHours_PRD_with_Diagrams.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-sm transition-colors flex-1"
+                        >
+                            <FileDown className="w-4 h-4 mr-2" />
+                            Open / Download PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div className="p-6 border border-emerald-100 bg-emerald-50/30 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div className="flex items-center justify-between mb-3">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">
+                                Open Source
+                            </span>
+                            <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                        </div>
+                        <h4 className="font-bold text-gray-900 text-base mb-1">MIT Software License</h4>
+                        <p className="text-xs text-gray-600 mb-4 leading-relaxed">
+                            TrackMyHours is open-source software under the permissive MIT License. Free for commercial, institutional, and personal use.
+                        </p>
+                    </div>
+                    <Button 
+                        variant="secondary" 
+                        onClick={() => setShowLicenseModal(true)}
+                        className="w-full flex items-center justify-center"
+                    >
+                        <ShieldCheck className="w-4 h-4 mr-2 text-emerald-600" />
+                        View License Terms
+                    </Button>
+                </div>
+            </div>
+        </div>
+
         {/* System Backup Section */}
         <div className="bg-white p-4 sm:p-8 rounded-xl shadow-md border border-gray-200">
             <div className="flex items-center mb-6 text-teal-600">
@@ -281,6 +345,11 @@ export const AdminReports: React.FC<AdminReportsProps> = ({ students, attendance
                 </div>
             </div>
         )}
+
+        <LicenseModal 
+            isOpen={showLicenseModal} 
+            onClose={() => setShowLicenseModal(false)} 
+        />
     </div>
   );
 };
